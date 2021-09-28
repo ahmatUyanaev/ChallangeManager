@@ -8,15 +8,17 @@ using System.Threading.Tasks;
 
 namespace ChallangeManager.Controllers
 {
-    [Route("challange")]
+    [Route("challenge")]
     [ApiController]
-    public class ChallangeController : ControllerBase
+    public class ChallengeController : ControllerBase
     {
         [HttpGet]
         [Route("getAll")]
-        public IEnumerable<Challange> GetChallanges()
+        public IEnumerable<Challenge> GetChallanges()
         {
-            return Enumerable.Empty<Challange>();
+            return Enumerable.Empty<Challenge>();
         }
+
+
     }
 }

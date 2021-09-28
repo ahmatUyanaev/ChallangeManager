@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ChallangeManager.Model
 {
-    public class Challange
+    public class Challenge
     {
         public string Name { get; set; }
 
