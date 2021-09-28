@@ -1,4 +1,5 @@
-﻿using ChallangeManager.Model;
+﻿using ChallangeManager.BizRules;
+using ChallangeManager.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,6 +13,13 @@ namespace ChallangeManager.Controllers
     [ApiController]
     public class ChallengeController : ControllerBase
     {
+        private IChallengeBizRules challengeBizRules;
+
+        public ChallengeController(IChallengeBizRules challengeBizRules)
+        {
+            this.challengeBizRules = challengeBizRules;
+        }
+
         [HttpGet]
         [Route("getAll")]
         public IEnumerable<Challenge> GetChallanges()
@@ -19,6 +27,11 @@ namespace ChallangeManager.Controllers
             return Enumerable.Empty<Challenge>();
         }
 
-
+        [HttpPost]
+        [Route("addChalenge")]
+        public async Task AddChallange(Challenge challenge)
+        {
+            await challengeBizRules.AddChallengeAsync(challenge);
+        }
     }
 }
