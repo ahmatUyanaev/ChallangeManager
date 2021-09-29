@@ -20,16 +20,16 @@ namespace ChallangeManager.Controllers
 
         [HttpGet]
         [Route("getAll")]
-        public async Task<IEnumerable<Challenge>> GetChallanges()
+        public async  Task<IEnumerable<Challenge>> GetChallanges()
         {
             return await challengeBizRules.GetAllChallenges();
         }
 
         [HttpPost]
         [Route("addChalenge")]
-        public async void AddChallange(Challenge challenge)
+        public async Task<int> AddChallange(Challenge challenge)
         {
-            await challengeBizRules.AddChallengeAsync(challenge);
+            return await challengeBizRules.AddChallengeAsync(challenge);
         }
     }
 }

@@ -7,7 +7,7 @@ namespace ChallangeManager.BizRules
 {
     public interface IChallengeBizRules
     {
-        public Task AddChallengeAsync(Challenge challenge);
+        public Task<int> AddChallengeAsync(Challenge challenge);
 
         public Task<IEnumerable<Challenge>> GetAllChallenges();
     }

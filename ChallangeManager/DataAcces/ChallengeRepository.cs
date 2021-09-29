@@ -4,34 +4,38 @@ using System.Data.SqlClient;
 using System.Threading.Tasks;
 
 using ChallangeManager.Model;
+using ChallangeManager.DataAcces.Session;
+
 using Dapper;
 
 namespace ChallangeManager.DataAcces
 {
     public class ChallengeRepository : IChallengeRepository
     {
-        public Task AddChallengeAsync(Challenge challenge)
+        public async Task<int> AddChallengeAsync(ISession session, Challenge challenge)
         {
-            using (IDbConnection connection = new SqlConnection(@"Data Source=DESKTOP-29CFBJD\SQLEXPRESS;Initial Catalog=ChallengeDB;Integrated Security=True"))
-            {
-                var parametrs = new { name = challenge.Name, creationTime = challenge.CreationTime, deadLine = challenge.DeadLine };
-                var query = @"
+           
+            var parametrs = new {
+                id = challenge.Id,
+                name = challenge.Name,
+                creationTime = challenge.CreationTime,
+                deadLine = challenge.DeadLine };
+
+            var query = @"
 INSERT INTO Challenges
-(Name, CreationTime, DeadLine)
-VALUES(@name, @creationTime, @deadLine)
+    (Id, Name, CreationTime, DeadLine)
+VALUES
+    (@id, @name, @creationTime, @deadLine)
 ";
-                return connection.QueryAsync(query, parametrs);
-            }
+
+                 return await session.ExecuteAsync(query, parametrs);
         }
 
-        public async Task<IEnumerable<Challenge>> GetAllChallenges()
+        public async Task<IEnumerable<Challenge>> GetAllChallenges(ISession session)
         {
-            using (IDbConnection connection = new SqlConnection(@"Data Source=DESKTOP-29CFBJD\SQLEXPRESS;Initial Catalog=ChallengeDB;Integrated Security=True"))
-            {
-                var query = @"select * from Challenges";
+            var query = @"select * from Challenges";
 
-                return await connection.QueryAsync<Challenge>(query);
-            }
+            return await session.QueryAsync<Challenge>(query);
         }
     }
 }

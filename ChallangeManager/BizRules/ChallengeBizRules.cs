@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 
 using ChallangeManager.DataAcces;
+using ChallangeManager.DataAcces.Session;
 using ChallangeManager.Model;
 
 namespace ChallangeManager.BizRules
@@ -9,21 +10,29 @@ namespace ChallangeManager.BizRules
     public class ChallengeBizRules : IChallengeBizRules
     {
         private IChallengeRepository challengeRepository;
+        private ISessionFactory sessionFactory;
 
-        public ChallengeBizRules(IChallengeRepository challengeRepository)
+        public ChallengeBizRules(IChallengeRepository challengeRepository,
+            ISessionFactory sessionFactory)
         {
             this.challengeRepository = challengeRepository;
+            this.sessionFactory = sessionFactory;
         }
 
-        public Task AddChallengeAsync(Challenge challenge)
+        public async Task<int> AddChallengeAsync(Challenge challenge)
         {
-            return challengeRepository.AddChallengeAsync(challenge);
+            using (var session = sessionFactory.CreateSession())
+            {
+                return await challengeRepository.AddChallengeAsync(session, challenge);
+            }
         }
 
         public async Task<IEnumerable<Challenge>> GetAllChallenges()
         {
-            return await challengeRepository.GetAllChallenges();
-        
+            using (var session = sessionFactory.CreateSession())
+            {
+                return await challengeRepository.GetAllChallenges(session);
+            }
         }
     }
 }

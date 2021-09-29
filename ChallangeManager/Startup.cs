@@ -7,6 +7,8 @@ using Microsoft.OpenApi.Models;
 
 using ChallangeManager.BizRules;
 using ChallangeManager.DataAcces;
+using ChallangeManager.DataAcces.Session;
+
 namespace ChallangeManager
 {
     public class Startup
@@ -25,6 +27,8 @@ namespace ChallangeManager
 
             services.AddSingleton<IChallengeBizRules, ChallengeBizRules>();
             services.AddSingleton<IChallengeRepository, ChallengeRepository>();
+            services.AddSingleton<ISessionFactory, SessionFactory>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
