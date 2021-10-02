@@ -28,6 +28,8 @@ namespace ChallangeManager
             services.AddSingleton<IChallengeBizRules, ChallengeBizRules>();
             services.AddSingleton<IChallengeRepository, ChallengeRepository>();
             services.AddSingleton<ISessionFactory, SessionFactory>();
+            services.AddSingleton<ISubtaskBizRules, SubtaskBizRules>();
+            services.AddSingleton<ISubtaskRepository, SubtaskRepository>();
 
             services.AddSwaggerGen(c =>
             {

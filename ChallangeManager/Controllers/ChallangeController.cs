@@ -22,7 +22,7 @@ namespace ChallangeManager.Controllers
         [Route("getAll")]
         public async  Task<IEnumerable<Challenge>> GetChallanges()
         {
-            return await challengeBizRules.GetAllChallenges();
+            return await challengeBizRules.GetAllChallengesAsync();
         }
 
         [HttpPost]

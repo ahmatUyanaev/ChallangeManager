@@ -10,6 +10,6 @@ namespace ChallangeManager.DataAcces
     {
         public Task<int> AddChallengeAsync(ISession session, Challenge challenge);
 
-        public Task<IEnumerable<Challenge>> GetAllChallenges(ISession session);
+        public Task<IEnumerable<Challenge>> GetAllChallengesAsync(ISession session);
     }
 }

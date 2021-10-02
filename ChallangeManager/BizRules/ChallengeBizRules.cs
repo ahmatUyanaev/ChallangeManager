@@ -11,12 +11,15 @@ namespace ChallangeManager.BizRules
     {
         private IChallengeRepository challengeRepository;
         private ISessionFactory sessionFactory;
+        private ISubtaskBizRules subtaskBizRules;
 
         public ChallengeBizRules(IChallengeRepository challengeRepository,
-            ISessionFactory sessionFactory)
+            ISessionFactory sessionFactory,
+            ISubtaskBizRules subtaskBizRules)
         {
             this.challengeRepository = challengeRepository;
             this.sessionFactory = sessionFactory;
+            this.subtaskBizRules = subtaskBizRules;
         }
 
         public async Task<int> AddChallengeAsync(Challenge challenge)
@@ -27,11 +30,16 @@ namespace ChallangeManager.BizRules
             }
         }
 
-        public async Task<IEnumerable<Challenge>> GetAllChallenges()
+        public async Task<IEnumerable<Challenge>> GetAllChallengesAsync()
         {
             using (var session = sessionFactory.CreateSession())
             {
-                return await challengeRepository.GetAllChallenges(session);
+                var challenges =  await challengeRepository.GetAllChallengesAsync(session);
+                foreach (var challenge in challenges)
+                {
+                    challenge.Subtasks = await subtaskBizRules.GetSubtasksByChallengeIdAsync(challenge.Id);
+                }
+                return challenges;
             }
         }
     }

@@ -1,12 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
 using System.Threading.Tasks;
 
 using ChallangeManager.Model;
 using ChallangeManager.DataAcces.Session;
-
-using Dapper;
 
 namespace ChallangeManager.DataAcces
 {
@@ -31,7 +27,7 @@ VALUES
                  return await session.ExecuteAsync(query, parametrs);
         }
 
-        public async Task<IEnumerable<Challenge>> GetAllChallenges(ISession session)
+        public async Task<IEnumerable<Challenge>> GetAllChallengesAsync(ISession session)
         {
             var query = @"select * from Challenges";
 

@@ -9,6 +9,6 @@ namespace ChallangeManager.BizRules
     {
         public Task<int> AddChallengeAsync(Challenge challenge);
 
-        public Task<IEnumerable<Challenge>> GetAllChallenges();
+        public Task<IEnumerable<Challenge>> GetAllChallengesAsync();
     }
 }

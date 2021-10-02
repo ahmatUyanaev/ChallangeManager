@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ChallangeManager.Model
 {
@@ -11,5 +12,7 @@ namespace ChallangeManager.Model
         public DateTime CreationTime { get; set; }
 
         public DateTime DeadLine { get; set; }
+
+        public IEnumerable<Subtask> Subtasks { get; set; }
     }
 }
