@@ -9,5 +9,6 @@ namespace ChallangeManager.DataAcces
     public interface ISubtaskRepository
     {
         Task<IEnumerable<Subtask>> GetSubtasksByChallengeIdAsync(ISession session, int challengeId);
+        Task<int> AddSubtask(ISession session, Subtask subtask);
     }
 }

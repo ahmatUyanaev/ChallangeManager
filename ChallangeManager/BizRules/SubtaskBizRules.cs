@@ -19,6 +19,14 @@ namespace ChallangeManager.BizRules
             this.sessionFactory = sessionFactory;
         }
 
+        public async Task<int> AddSubtask(Subtask subtask)
+        {
+            using (ISession session = sessionFactory.CreateSession())
+            {
+                return await subtaskRepository.AddSubtask(session, subtask);
+            }
+        }
+
         public async Task<IEnumerable<Subtask>> GetSubtasksByChallengeIdAsync(int challengeId)
         {
             using (ISession session = sessionFactory.CreateSession())

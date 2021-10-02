@@ -10,5 +10,6 @@ namespace ChallangeManager.BizRules
     {
         Task<IEnumerable<Subtask>> GetSubtasksByChallengeIdAsync(int challengeId);
 
+        Task<int> AddSubtask(Subtask subtask);
     }
 }
