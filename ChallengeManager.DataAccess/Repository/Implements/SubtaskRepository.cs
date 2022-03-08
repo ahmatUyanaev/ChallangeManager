@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using ChallengeManager.Data.BaseModels;
+using ChallengeManager.DataAccess.Repository.Contracts;
+using ChallengeManager.DataAccess.Sessions;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
-using ChallangeManager.DataAcces.Session;
-using ChallangeManager.Model;
-
-namespace ChallangeManager.DataAcces
+namespace ChallengeManager.DataAccess.Repository.Implements
 {
     public class SubtaskRepository : ISubtaskRepository
     {
@@ -13,7 +13,7 @@ namespace ChallangeManager.DataAcces
             var parametrs = new
             {
                 name = subtask.Name,
-                challengeId = subtask.ChallengeId
+                challengeId = subtask.ObjectiveId
             };
 
             var query = @"
@@ -26,11 +26,11 @@ VALUES
             return await session.ExecuteAsync(query, parametrs);
         }
 
-        public async Task<IEnumerable<Subtask>> GetSubtasksByChallengeIdAsync(ISession session, int challengeId)
+        public async Task<IEnumerable<Subtask>> GetSubtasksByObjectiveIdAsync(ISession session, int objectiveId)
         {
             var parametrs = new
             {
-                challengeID = challengeId
+                challengeID = objectiveId
             };
 
             string query = @"

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ChallangeManager.Model
+namespace ChallengeManager.Data.BaseModels
 {
-    public class Challenge
+    public class Objective
     {
         public int Id { get; set; }
 

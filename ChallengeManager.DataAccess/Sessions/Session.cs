@@ -1,15 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using Dapper;
+using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 
-using Dapper;
-
-namespace ChallangeManager.DataAcces.Session
+namespace ChallengeManager.DataAccess.Sessions
 {
     public class Session : ISession
     {
-        private IDbConnection connection;
-
+        private readonly IDbConnection connection;
 
         public Session(IDbConnection connection)
         {
@@ -33,7 +31,7 @@ namespace ChallangeManager.DataAcces.Session
 
         public void Dispose()
         {
-
+            connection.Dispose();
         }
     }
 }

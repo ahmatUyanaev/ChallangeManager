@@ -1,13 +1,14 @@
+using ChallengeManager.BizRules.Contracts;
+using ChallengeManager.BizRules.Impements;
+using ChallengeManager.DataAccess.Repository.Contracts;
+using ChallengeManager.DataAccess.Repository.Implements;
+using ChallengeManager.DataAccess.Sessions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-
-using ChallangeManager.BizRules;
-using ChallangeManager.DataAcces;
-using ChallangeManager.DataAcces.Session;
 
 namespace ChallangeManager
 {
@@ -25,11 +26,11 @@ namespace ChallangeManager
         {
             services.AddControllers();
 
-            services.AddSingleton<IChallengeBizRules, ChallengeBizRules>();
-            services.AddSingleton<IChallengeRepository, ChallengeRepository>();
             services.AddSingleton<ISessionFactory, SessionFactory>();
-            services.AddSingleton<ISubtaskBizRules, SubtaskBizRules>();
+            services.AddSingleton<IObjectiveRepository, ObjectiveRepository>();
             services.AddSingleton<ISubtaskRepository, SubtaskRepository>();
+            services.AddSingleton<IObjectiveBizRules, ObjectiveBizRules>();
+            services.AddSingleton<ISubtaskBizRules, SubtaskBizRules>();
 
             services.AddSwaggerGen(c =>
             {

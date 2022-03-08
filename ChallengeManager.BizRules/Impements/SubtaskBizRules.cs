@@ -1,17 +1,17 @@
-﻿using ChallangeManager.DataAcces;
-using ChallangeManager.DataAcces.Session;
-using ChallangeManager.Model;
-using System;
+﻿using ChallengeManager.BizRules.Contracts;
+using ChallengeManager.Data.BaseModels;
+using ChallengeManager.DataAccess.Repository.Contracts;
+using ChallengeManager.DataAccess.Sessions;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
-namespace ChallangeManager.BizRules
+namespace ChallengeManager.BizRules.Impements
 {
     public class SubtaskBizRules : ISubtaskBizRules
     {
         private ISubtaskRepository subtaskRepository;
         private ISessionFactory sessionFactory;
+
         public SubtaskBizRules(ISubtaskRepository subtaskRepository,
             ISessionFactory sessionFactory)
         {
@@ -27,11 +27,11 @@ namespace ChallangeManager.BizRules
             }
         }
 
-        public async Task<IEnumerable<Subtask>> GetSubtasksByChallengeIdAsync(int challengeId)
+        public async Task<IEnumerable<Subtask>> GetSubtasksByObjectiveIdAsync(int objectiveId)
         {
             using (ISession session = sessionFactory.CreateSession())
             {
-                return await subtaskRepository.GetSubtasksByChallengeIdAsync(session, challengeId);
+                return await subtaskRepository.GetSubtasksByObjectiveIdAsync(session, objectiveId);
             }
         }
     }

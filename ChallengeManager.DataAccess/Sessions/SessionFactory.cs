@@ -1,6 +1,6 @@
 ﻿using System.Data.SqlClient;
 
-namespace ChallangeManager.DataAcces.Session
+namespace ChallengeManager.DataAccess.Sessions
 {
     public class SessionFactory : ISessionFactory
     {
